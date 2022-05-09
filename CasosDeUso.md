@@ -6,8 +6,6 @@ _Descripción_ : Un paciente quiere registrase para iniciar sesión.
 
 _Actor primario:_ Paciente
 
-_Actor Secundario:_ Cloud
-
 _Trigger:_ El caso de uso comienza cuando el paciente se quiere registrar.
 
 _Curso básico:_
@@ -32,8 +30,6 @@ _Finalización del caso de uso:_ El paciente completó el registro y se creó la
 _Descripción:_ Un paciente quiere  iniciar sesión para acceder al sistema.
 
 _Actor primario:_ Paciente
-
-_Actor Secundario:_ Cloud
 
 _Trigger:_ El caso de uso comienza cuando el paciente  quiere iniciar sesión.
 
@@ -68,8 +64,6 @@ _Finalización del caso de uso:_ El paciente inicia sesión en el sistema.
 _Descripción:_ Un paciente desea solicitar un turno.
 
 _Actor primario:_ Paciente
-
-_Actor Secundario:_ Cloud
 
 _Trigger:_ El caso de uso comienza cuando el paciente quiere sacar un turno.
 
