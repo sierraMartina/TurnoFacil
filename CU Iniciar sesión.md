@@ -18,7 +18,7 @@ _Curso básico:_
 
 _Curso Alternativo:_ no registrado
 
-	1. El sistema verifica que existe una cuenta con ese DNI
+	4. El sistema verifica que existe una cuenta con ese DNI
 	4.1 El sistema verifica que no existe una cuenta con ese DNI
 	4.2 PE1 [no registrado]
 	4.3 Ir a punto 4
