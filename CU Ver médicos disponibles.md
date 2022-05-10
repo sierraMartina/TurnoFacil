@@ -19,11 +19,10 @@ _Curso básico:_
 
 _Curso Alternativo:_ No utiliza el filtrado
 
-    4. El paciente selecciona uno de los filtros existentes.
-    4.1 El paciente no selecciona un filtro
-    4.2 El sistema muestra todos los médicos disponibles ordenados alfabéticamente
-    4.3 Ir al punto 6
-
+    3. El paciente selecciona uno de los filtros existentes.
+    3.1 El paciente no selecciona un filtro
+    3.2 El sistema muestra todos los médicos disponibles ordenados alfabéticamente
+    3.3 Ir al punto 6
 
 
 _Precondición:_ ---
