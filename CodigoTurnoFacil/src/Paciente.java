@@ -5,19 +5,19 @@ public class Paciente {
 	private String nombre;
 	private String apellido;
 	private int telefono;
-	private int númeroDeAfiliado;
+	private int numeroDeAfiliado;
 	private String direccion;
 	private String obraSocial;
 	private String mail;
 	private List<Turno> turnos = new ArrayList<>();
 	
-	public Paciente(String nombre, String apellido, int telefono, int númeroDeAfiliado, String direccion,
+	public Paciente(String nombre, String apellido, int telefono, int numeroDeAfiliado, String direccion,
 			String obraSocial, String mail) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
-		this.númeroDeAfiliado = númeroDeAfiliado;
+		this.numeroDeAfiliado = numeroDeAfiliado;
 		this.direccion = direccion;
 		this.obraSocial = obraSocial;
 		this.mail = mail;
@@ -47,12 +47,12 @@ public class Paciente {
 		this.telefono = telefono;
 	}
 
-	public int getNúmeroDeAfiliado() {
-		return númeroDeAfiliado;
+	public int getNumeroDeAfiliado() {
+		return numeroDeAfiliado;
 	}
 
-	public void setNúmeroDeAfiliado(int númeroDeAfiliado) {
-		this.númeroDeAfiliado = númeroDeAfiliado;
+	public void setNumeroDeAfiliado(int numeroDeAfiliado) {
+		this.numeroDeAfiliado = numeroDeAfiliado;
 	}
 
 	public String getDireccion() {
@@ -79,6 +79,10 @@ public class Paciente {
 		this.mail = mail;
 	}
 
+	public void addTurno(Turno t) {
+		turnos.add(t);
+	}
+	
 	public Turno getTurnos(int posicion) {
 		if (posicion > -1 && posicion < turnos.size())
 			return turnos.get(posicion);
@@ -86,6 +90,10 @@ public class Paciente {
 			System.out.println("No existe turno en esa posicion");
 			return null;
 		}
+	}
+	
+	public List<Turno> getListTurnos(){
+		return turnos;
 	}
 	
 	public void borrarTurno (Turno turno) {
@@ -97,5 +105,13 @@ public class Paciente {
 			turnos.add(turno);
 	}
 	
-	
+    public void  mostrarDatos(){
+        System.out.print("Nombre: " + nombre);
+        System.out.print("Apellido: " + apellido);
+        System.out.print("Direccion: " + direccion);
+        System.out.print("Telefono: " + telefono);
+        System.out.print("Mail: " + mail);
+        System.out.print("ObraSocial: " + obraSocial);
+        System.out.print("NumeroDeAfiliado:" + numeroDeAfiliado);
+    }
 }

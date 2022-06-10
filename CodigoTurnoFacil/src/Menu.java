@@ -34,10 +34,10 @@ public class Menu {
 				
 				switch (opcion) {
 					case 1:
-						sacarTurno(c1);
+						sacarTurno(c1, p);
 						break;
 					case 2:
-						
+						mostrarTurnosPaciente(p);
 						break;
 						
 					case 3:
@@ -53,11 +53,16 @@ public class Menu {
 		System.out.println("Gracias por usar TurnoFacil");
 		// Fin del menu visual
 	}
-	public static void sacarTurno (Clinica c1) {
+	public static void sacarTurno (Clinica c1, Paciente p) {
 		Medico medicoSelec = c1.seleccionarMedico();
 		System.out.println(medicoSelec.getNombre());
 		//if (medicoSelec != null)
 			medicoSelec.getHorarioLaboral().mostrarHorario();
+			
+		Turno t = new Turno();
+		confirmarDatosPaciente(p);
+        p.agregarTurno(t);
+        System.out.printl("Se envia email al paciente con el detalle del turno");
 	}
 	
 	public static Calendar cargarFecha () { // Para cargar una fecha especifica
@@ -72,5 +77,50 @@ public class Menu {
 		int anio = parteFecha.nextInt();
 		Calendar ca = new GregorianCalendar(anio, mes, dia);
 		return ca;
+	}
+	
+    public static void confirmarDatosPaciente(Paciente p){
+        p.mostrarDatos();
+        modificarDatos(p);
+    }
+    
+ 
+    public static void modificarDatos(Paciente p){
+        
+        int opcion;
+        Scanner entradaEscaner = new Scanner (System.in); 
+        
+        System.out.printl(" Seleccione: ");
+        System.out.printl("1 : Modificar Nombre");
+        System.out.printl("2 : Modificar Apellido");                              
+        System.out.printl("3 : Modificar Direccion");                                
+        System.out.printl("4 : Modificar Telefono");                                
+        System.out.printl("5 : Modificar Mail");                               
+        System.out.printl("6 : Modificar Obra social");                                
+        System.out.printl("7 : Modificar Numero de afiliado");                              
+        System.out.printl("0 : Reconfirmar datos");                                
+        
+        while opcion != 0{
+            switch(opcion){
+                case "1" : {String entradaTeclado = entradaEscaner.nextLine ();  p.setNombre(entradaTeclado); break;}
+                case "2" : {String entradaTeclado = entradaEscaner.nextLine ();  p.setApellido(entradaTeclado); break;}
+                case "3" : {String entradaTeclado = entradaEscaner.nextLine ();  p.setDireccion(entradaTeclado); break;}
+                case "4" : {String entradaTeclado = entradaEscaner.nextLine ();  p.setTelefono(entradaTeclado); break;}
+                case "5" : {String entradaTeclado = entradaEscaner.nextLine ();  p.setMail(entradaTeclado); break;}
+                case "6" : {String entradaTeclado = entradaEscaner.nextLine ();  p.setObraSocial(entradaTeclado); break;}
+                case "7" : {int entradaTeclado = entradaEscaner.nextLine ();  p.setNumeroDeAfiliado(entradaTeclado); break;}
+            }
+        }
+    
+	
+	public static void mostrarTurnosPaciente(Paciente p) {
+		
+		if(p.getListTurnos().isEmpty())
+			System.out.printl("No hay turnos proximos");
+		else {
+			for(int i = 0; i < p.getListTurnos().size(); i++)
+				System.out.printl("Turno: ")
+	            System.out.println(p.getListTurnos().get(i).toString());
+		}
 	}
 }

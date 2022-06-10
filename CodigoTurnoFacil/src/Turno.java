@@ -44,4 +44,8 @@ public class Turno {
 			return false;
 		return true;
 	}
+	
+	public String toString() {
+		return " Medico: " + this.getMedico() + " Dia: " + this.getFecha().getDay() + " Mes: " + this.getFecha().getMonth() + " Año: " + this.getFecha().getYear() + " Hora: " + this.getHora();
+	}
 }
