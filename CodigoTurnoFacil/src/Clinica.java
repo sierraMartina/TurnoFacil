@@ -7,8 +7,6 @@ import java.util.Scanner;
 public class Clinica {
 	private List<Medico> medicos = new ArrayList<>();
 	private List<Turno> turnos = new ArrayList<>();
-	private List<String> especialidades = new ArrayList<>();
-	private List<String> obraSociales = new ArrayList<>();
 	
 	public Clinica() {
 		super();
@@ -17,10 +15,6 @@ public class Clinica {
 	public void addMedico (Medico nuevoMed) {
 		if (!medicos.contains(nuevoMed)) {
 			medicos.add(nuevoMed);
-			this.setEspecialidad(nuevoMed.getEspecialidad());
-			for (int i = 0; i < nuevoMed.cantOS(); i++) {
-				this.setObraSocial(nuevoMed.getOS(i));
-			}
 		}
 	}
 	
@@ -85,32 +79,25 @@ public class Clinica {
 		}
 	}
 	
-	public void setEspecialidad (String especialidad) {
-		if (!especialidades.contains(especialidad)) // solo especialidades que no existan yan
-			especialidades.add(especialidad);
-	}
 	
-	public String getEspecialidad (int posicion) {
-		if (posicion > -1 && posicion < especialidades.size()) 
-			return especialidades.get(posicion);
-		else {
-			System.out.println("Esa posicion no existe");
-			return "error";
+	public List<String> getEspecialidades () {
+		List<String> esp = new ArrayList<>();
+		for (Medico m: medicos) {
+			if (!esp.contains(m.getEspecialidad()))
+				esp.add(m.getEspecialidad());
 		}
+		return esp;
 	}
 	
-	public void setObraSocial (String obraSocial) {
-		if (!obraSociales.contains(obraSocial)) // solo agrega obra sociales que no existan ya
-			obraSociales.add(obraSocial);
-	}
-	
-	public String getObraSocial (int posicion) {
-		if (posicion > -1 && posicion < obraSociales.size()) 
-			return obraSociales.get(posicion);
-		else {
-			System.out.println("Esa posicion no existe");
-			return "error";
+	public List<String> getObraSocial () {
+		List<String> oS = new ArrayList<>();
+		for (Medico m: medicos) {
+			for (int i = 0; i < m.cantObraSocial(); i++) {
+				if (!oS.contains(m.getOS(i)))
+					oS.add(m.getOS(i));
+			}
 		}
+		return oS;
 	}
 	
 	public void addTurno (Turno turno) {

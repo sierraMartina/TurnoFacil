@@ -99,6 +99,10 @@ public class Medico implements Comparable<Medico>{
 			obraSociales.add(nuevaOS);
 	}
 	
+	public int cantObraSocial () {
+		return obraSociales.size();
+	}
+	
 	public void borrarOS (String borrarOS) {
 		obraSociales.remove(borrarOS);
 	}

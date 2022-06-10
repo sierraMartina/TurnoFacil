@@ -46,6 +46,6 @@ public class Turno {
 	}
 	
 	public String toString() {
-		return " Medico: " + this.getMedico() + " Dia: " + this.getFecha().getDay() + " Mes: " + this.getFecha().getMonth() + " Año: " + this.getFecha().getYear() + " Hora: " + this.getHora();
+		return " Medico: " + this.getMedico() + " Dia: " + this.getFecha().get(Calendar.DAY_OF_MONTH) + " Mes: " + this.getFecha().get(Calendar.MONTH) + " Aï¿½o: " + this.getFecha().get(Calendar.YEAR) + " Hora: " + this.getHora();
 	}
 }
