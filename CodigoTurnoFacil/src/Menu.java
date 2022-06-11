@@ -1,4 +1,5 @@
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -143,7 +144,7 @@ public class Menu {
     
 	
 	public static void mostrarTurnosPaciente(Paciente p) {
-		
+		Collections.sort(p.getListTurnos());
 		if(p.getListTurnos().isEmpty())
 			System.out.println("No hay turnos proximos");
 		else {
