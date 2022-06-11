@@ -1,6 +1,6 @@
 import java.util.Calendar;
 
-public class Turno {
+public class Turno implements Comparable<Turno>{
 	private Medico medico;
 	private Calendar fecha;
 	private int hora; // va de la 1 a las 24
@@ -47,5 +47,10 @@ public class Turno {
 	
 	public String toString() {
 		return " Medico: " + this.getMedico() + " Dia: " + this.getFecha().get(Calendar.DAY_OF_MONTH) + " Mes: " + this.getFecha().get(Calendar.MONTH) + " A�o: " + this.getFecha().get(Calendar.YEAR) + " Hora: " + this.getHora();
+	}
+	
+	@Override
+	public int compareTo(Turno otroTurno) {
+		return this.getFecha().compareTo(otroTurno.getFecha());
 	}
 }
