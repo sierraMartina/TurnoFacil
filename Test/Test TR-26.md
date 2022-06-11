@@ -1,0 +1,7 @@
+# _Como paciente quiero poder visualizar y seleccionar los turnos disponibles para poder sacar un turno_
+
+¿Qué se pretende que haga? | ¿Qué hace? | Resultado | Datos que tiene el sistema | Datos de entrada | Salida Esperada | Salida obteneida (Descripción o imagen) | Comentarios (Opcional)
+--- | --- | --- | --- | --- | --- | --- | ---
+_Se debe poder crear un turno._ | _El paciente da una fecha y una hora para crear un turno y se verifica que este turno este disponible el medico_ | _Cumple_ | _"Marta", "Mendez", 14, 1, "Saavedra 122", "OSDE", "holi@gmail.com"), Medico: m1("jorge", "Ban", "esp1", "dir1", 11, 1, 1) y horarios agregados para el medico m1.getHorarioLaboral().cargarHorarioDia(1, 8, 16) y m1.getHorarioLaboral().cargarHorarioDia(3, 8, 16)_ | _Ingresamos para la fecha dia 3, mes 5 y anio 2022 y para la hora 10_ | _El turno es creado correctamente y pasamos a confirmar datos_ | _Pasamos a confirmar datos_ | _Comentario breve_ 
+_Antes de confirmar se avisa si el médico trabaja con la obra social del paciente._ | _En el caso de que el medico no trabaje con la obra social del paciente se le avisa_ | _Cumple_ | _Todo de los datos de los puntos anteriores_ |_No se ingresa nada_|_Se espera que muestre en este caso que "El medico no trabaja con su obra Social"_| _Se obtuvo el mensaje esperado "El medico no trabaja con su obra Social"_ | _Comentario breve_ 
+--- | --- | --- | --- | --- | --- | --- | ---
