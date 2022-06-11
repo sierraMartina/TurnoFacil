@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Horario {
-	private boolean [][] horarioLaboral = new boolean [24] [7]; // Tomaremos la columna 0 como domingo y la fila 0 como las 01hs, la hora va de 1 a 24
+	private boolean [][] horarioLaboral = new boolean [24] [7]; // Tomaremos la columna 0 como Domingo y la fila 0 como las 01hs, la hora va de 1 a 24
 
 	public Horario() {
 		super();
@@ -123,7 +123,11 @@ public class Horario {
 			}
 			dia++;
 				
-		}
-		
+		}	
 	}
+	
+	public boolean trabaja (int dia, int hora) { // si en el horario es trabaja devuelve true
+		return horarioLaboral [hora][dia];
+	}
+	
 }

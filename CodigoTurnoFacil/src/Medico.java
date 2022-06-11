@@ -116,8 +116,8 @@ public class Medico implements Comparable<Medico>{
 		}
 	}
 	
-	public void setTurnos(Turno turno) {
-		if (turnos.contains(turno))
+	public void anadirTurnos(Turno turno) {
+		if (turnoDisponible(turno))
 			turnos.add(turno);
 	}
 	
@@ -133,108 +133,50 @@ public class Medico implements Comparable<Medico>{
 		return obraSociales.size();
 	}
 	
-	public void mostrarTurnoDisponibleDia (Calendar fecha) {
-		int dia = fecha.get(Calendar.DAY_OF_WEEK);
+	public boolean trabajaConObraSocial (String obraSocial) {
+		return obraSociales.contains(obraSocial);
+	}
+	
+	public void mostrarTurnoDisponibleDia (Calendar fecha, int mananaOTarde) {
+		int dia = fecha.get(Calendar.DAY_OF_WEEK) - 1;
 		List<Turno> turnosOcupados = new ArrayList<>();
-		turnosOcupados = turnosDeUnaFecha(fecha);
+		turnosOcupados = turnosDeUnaFecha(fecha); // busca los turnos de una fecha especifica
 		int horaI = horarioLaboral.horaIncioDia(dia);
-		if (horaI == -1)
-			System.out.println("No trabaja este dia");
-		else {
-			boolean [] turnosDelDia = horarioLaboral.horarioOcupado(turnosOcupados, dia);
+		if (horaI != -1) {
+			boolean [] turnosDelDia = horarioLaboral.horarioOcupado(turnosOcupados, dia); // Aca lo que hace es pasar los turnos de ese dia y crea un array tan largo como el horario que cumple con las horas ocuapdas en true
 			boolean diaTotalmenteOcuapado = true;
 			for (int i = 0; i < turnosDelDia.length; i++) {
+				if (mananaOTarde == 1) { // esto nos dice que solo quiere turnos mañana
+					if (horaI + i > 12)
+						turnosDelDia[i] = true;
+				}
+				if (mananaOTarde == -1) { // esto nos dice que solo quiere turnos tarde
+					if (horaI + i < 13)
+						turnosDelDia[i] = true;
+				}
 				if (!turnosDelDia [i])
 					diaTotalmenteOcuapado = false;
 			}
-			switch (dia) 
-			{
-				case  0:
-					if (diaTotalmenteOcuapado)
-						System.out.println("El dia Domingo sin disponibilidad");
-					else {
-						System.out.print("Horas disponibles el Domingo: ");
-						for (int i = 0; i < turnosDelDia.length; i++) {
-							if (!turnosDelDia [i])
-								System.out.print((horaI + i) + " ");
-						}
-					}
-					break;
-				
-				case 1:
-					if (diaTotalmenteOcuapado)
-						System.out.println("El dia Lunes sin disponibilidad");
-					else {
-						System.out.print("Horas disponibles el Lunes: ");
-						for (int i = 0; i < turnosDelDia.length; i++) {
-							if (!turnosDelDia [i])
-								System.out.print((horaI + i) + " ");
-						}
-					}
-					break;
-				
-				case 2:
-					if (diaTotalmenteOcuapado)
-						System.out.println("El dia Martes sin disponibilidad");
-					else {
-						System.out.print("Horas disponibles el Martes: ");
-						for (int i = 0; i < turnosDelDia.length; i++) {
-							if (!turnosDelDia [i])
-								System.out.print((horaI + i) + " ");
-						}
-					}
-					break;
-				
-				case 3:
-					if (diaTotalmenteOcuapado)
-						System.out.println("El dia Mircoles sin disponibilidad");
-					else {
-						System.out.print("Horas disponibles el Mircoles: ");
-						for (int i = 0; i < turnosDelDia.length; i++) {
-							if (!turnosDelDia [i])
-								System.out.print((horaI + i) + " ");
-						}
-					}
-					break;
-				
-				case 4:
-					if (diaTotalmenteOcuapado)
-						System.out.println("El dia Jueves sin disponibilidad");
-					else {
-						System.out.print("Horas disponibles el Jueves: ");
-						for (int i = 0; i < turnosDelDia.length; i++) {
-							if (!turnosDelDia [i])
-								System.out.print((horaI + i) + " ");
-						}
-					}
-					break;
-				
-				case 5:
-					if (diaTotalmenteOcuapado)
-						System.out.println("El dia Viernes sin disponibilidad");
-					else {
-						System.out.print("Horas disponibles el Viernes: ");
-						for (int i = 0; i < turnosDelDia.length; i++) {
-							if (!turnosDelDia [i])
-								System.out.print((horaI + i) + " ");
-						}
-					}
-					break;
-				
-				case 6:
-					if (diaTotalmenteOcuapado)
-						System.out.println("El dia Sabado sin disponibilidad");
-					else {
-						System.out.print("Horas disponibles el Sabado: ");
-						for (int i = 0; i < turnosDelDia.length; i++) {
-							if (!turnosDelDia [i])
-								System.out.print((horaI + i) + " ");
-						}
-					}
-					break;
-					
+			
+			if (diaTotalmenteOcuapado)
+				System.out.println("El dia " + fecha.get(Calendar.DAY_OF_MONTH) + " del mes " + fecha.get(Calendar.MONTH) + " sin disponibilidad");
+			else {
+				System.out.print("Horas disponibles el dia " + fecha.get(Calendar.DAY_OF_MONTH) + " del mes " + fecha.get(Calendar.MONTH) + ": ");
+				for (int i = 0; i < turnosDelDia.length; i++) {
+					if (!turnosDelDia [i])
+						System.out.print((horaI + i) + " ");
+				}
 			}
+			System.out.println("\n");
 		}
+	}
+	
+	public boolean turnoDisponible (Turno turno) {
+		if (!turnos.contains(turno)) {
+			if (horarioLaboral.trabaja(turno.getFecha().get(Calendar.DAY_OF_WEEK), turno.getHora()))
+				return true;
+		}
+		return false;
 	}
 	
 	public List<Turno> turnosDeUnaFecha (Calendar fecha){
