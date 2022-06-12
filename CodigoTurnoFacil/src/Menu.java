@@ -105,13 +105,28 @@ public class Menu {
 				System.out.println("Se debe ingresar un numero");
 			}
 			if (opcion == 1) {
-				Turno t = crearTurno (medicoSelec, p);
-				confirmarDatosPaciente(p);
-				p.addTurno(t);
-				System.out.println("Se envia email al paciente con el detalle del turno");
+				if (!medicoSelec.trabajaConObraSocial(p.getObraSocial())) { // En el caso que no trabaje con la obra social se pregunta si quiere sacar el turno de todas maneras
+					opcion = 3;
+					System.out.println("El medico no trabaja con su obra social");
+					try {
+						while (opcion > 2 || opcion < 1) {
+							System.out.println("Si desea sacar el turno de igual manera ingresar 1 en caso contrario ingresar 2");
+							Scanner sn = new Scanner(System.in);
+							opcion = sn.nextInt();
+						}
+					} catch(InputMismatchException e) {
+						System.out.println("Se debe ingresar un numero");
+					}
+				}
+				if (opcion == 1) {
+					Turno t = crearTurno (medicoSelec, p);
+					confirmarDatosPaciente(p);
+					p.addTurno(t);
+					System.out.println("Se envia email al paciente con el detalle del turno");
+				}
 			}
 		}
-	}
+	} 
 	
 	public static void mostrarTurnosDisponibles (Medico medicoSelec, Calendar diaI, Calendar diaF, int mananaOTarde) {
 		int diferencia = diaF.get(Calendar.DAY_OF_YEAR) - diaI.get(Calendar.DAY_OF_YEAR);
