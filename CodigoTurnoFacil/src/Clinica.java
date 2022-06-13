@@ -76,7 +76,7 @@ public class Clinica {
 			}
 		}
 		if (!eligio) {
-			System.out.println("No hay mas medicos");
+			System.out.println("No hay mas medicos \n");
 			return null;
 		}
 		else {
