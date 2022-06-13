@@ -1,3 +1,4 @@
+
 public class CriterioEspecialidad implements Criterio{
 	private String especialidad;
 	

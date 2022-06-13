@@ -215,6 +215,9 @@ public class Menu {
 	        System.out.println("0 : Reconfirmar datos");                                
 	        opcion = sn.nextInt();
 	            switch(opcion){
+	            	case 0:{
+	            		break;
+	            	}
 	                case 1 : {
 	                	System.out.println("Ingresar Nombre nuevo"); 
 	                	p.setNombre(sn.nextLine()); 
