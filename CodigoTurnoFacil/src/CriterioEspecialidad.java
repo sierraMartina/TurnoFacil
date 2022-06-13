@@ -1,5 +1,5 @@
 public class CriterioEspecialidad implements Criterio{
-	String especialidad;
+	private String especialidad;
 	
 	public CriterioEspecialidad(String especialidad) {
 		super();
