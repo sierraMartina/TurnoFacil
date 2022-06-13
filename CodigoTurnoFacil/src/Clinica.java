@@ -34,19 +34,25 @@ public class Clinica {
 		}
 	}
 	
-	public Medico seleccionarMedico () {
-		Collections.sort(medicos);
+	public Medico seleccionarMedico (Criterio c) {
+		List<Medico> listaFiltrada = new ArrayList<>();
+		for (Medico m: medicos) {
+			if (c.cumple(m)){
+				listaFiltrada.add(m);
+			}
+		}
+		Collections.sort(listaFiltrada);
 		boolean eligio = false;
 		int posicion = 0;
 		int cantMovimiento;
 		int seleccionar = -1;
-		while (posicion < medicos.size() && !eligio) {
-			if ((posicion + 10) < medicos.size()) // como mostramos de a 10 medicos miramos si hay 10 medicos para mostrar sino mostramos la cantidad que hay
+		while (posicion < listaFiltrada.size() && !eligio) {
+			if ((posicion + 10) < listaFiltrada.size()) // como mostramos de a 10 medicos miramos si hay 10 medicos para mostrar sino mostramos la cantidad que hay
 				cantMovimiento = posicion + 10;
-			else {cantMovimiento = medicos.size() - posicion;}
+			else {cantMovimiento = listaFiltrada.size() - posicion;}
 			System.out.println("Medicos :");
 			while (posicion < cantMovimiento) {// mostramos los medicos con el numero de posicion
-				System.out.println((posicion+1) + ". " + medicos.get(posicion).toString());
+				System.out.println((posicion+1) + ". " + listaFiltrada.get(posicion).toString());
 				System.out.println("\n");
 				posicion++;
 			}
@@ -75,7 +81,7 @@ public class Clinica {
 			return null;
 		}
 		else {
-			return medicos.get(seleccionar-1);
+			return listaFiltrada.get(seleccionar-1);
 		}
 	}
 	

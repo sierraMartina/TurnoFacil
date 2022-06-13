@@ -93,11 +93,7 @@ public class Paciente {
 	}
 	
 	public List<Turno> getListTurnos(){
-		List<Turno> copiaTurnos = new ArrayList<>();
-		for(int i=0; i < turnos.size(); i++) {
-			copiaTurnos.add(turnos.get(i));
-		}
-		return copiaTurnos;
+		return turnos;
 	}
 	
 	public void borrarTurno (Turno turno) {
