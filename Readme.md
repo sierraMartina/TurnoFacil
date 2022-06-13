@@ -10,3 +10,4 @@ _Integrantes:_
 - Sierra, Martina
 - Silvestri Ayala, Giuliana Estefanía
 
+Link de Jira: https://metodologia2022tpe.atlassian.net/jira/software/projects/TR/boards/2
