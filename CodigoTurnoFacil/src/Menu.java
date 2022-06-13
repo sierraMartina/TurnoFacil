@@ -9,18 +9,31 @@ public class Menu {
 	public static void main(String[] args) {
 		
 		Clinica c1 = new Clinica();
-		Paciente p1 = new Paciente("yo", "soy", 14, 1, "tu", "padre", "me sobro este espacio");
+		Paciente p1 = new Paciente("yo", "soy", 14, 1, "tu", "padre", "Obra 1");
 		Paciente p2 = new Paciente("Soy", "otro", 15, 2, "otro", "paciente", "jaja");
-		Medico m1 = new Medico("jorge", "Ban", "esp1", "dir1", 11, 1, 1);
-		Medico m2 = new Medico("Catalina", "Rivera", "esp2", "dir1", 11, 1, 2);
-		Medico m3 = new Medico("Medio", "Dia", "esp1", "dir1", 11, 1, 3);
-		m1.getHorarioLaboral().cargarHorarioDia(1, 10, 11);
-		m1.getHorarioLaboral().cargarHorarioDia(3, 10, 11);
-		m1.getHorarioLaboral().cargarHorarioDia(5, 10, 11);
-		m1.addOS("soy una obra social");
-		c1.addMedico(m1);
-		c1.addMedico(m2);
-		c1.addMedico(m3);
+		Medico m1 = new Medico("jorge", "Ban", "esp1", "dir1", 11, 123, 1);
+		Medico m2 = new Medico("Catalina", "Rivera", "esp2", "dir1", 11, 15, 2);
+		Medico m3 = new Medico("Medio", "Dia", "esp1", "dir1", 11, 5, 3);
+		Medico m4 = new Medico("Andy", "Port", "esp1", "dir1", 11, 9, 4);
+		Medico m5 = new Medico("Pio", "Cast", "esp2", "dir1", 11, 8, 5);
+		Medico m6 = new Medico("Ni", "Idea", "esp3", "dir1", 11, 148, 6);
+		Medico m7 = new Medico("Cas", "pa", "esp1", "dir1", 11, 152, 7);
+		Medico m8 = new Medico("Giorno", "Giovana", "esp1", "dir1", 11, 13, 8);
+		Medico m9 = new Medico("Juan", "Palai", "esp2", "dir1", 11, 152, 9);
+		Medico m10 = new Medico("Piu", "Paw", "esp1", "dir1", 11, 112, 10);
+		Medico m11 = new Medico("Bang", "Dia", "esp3", "dir1", 11, 100, 11);
+		Medico m12 = new Medico("Holis", "no se que poner", "esp3", "dir1", 11, 114, 12);
+		Medico [] m = {m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12};
+		m1.getHorarioLaboral().cargarHorarioDia(1, 10, 16);
+		m1.getHorarioLaboral().cargarHorarioDia(3, 10, 18);
+		m1.getHorarioLaboral().cargarHorarioDia(5, 10, 20);
+		m1.addOS("OSDE");
+		for (int i =0; i < m.length; i++) {
+			c1.addMedico(m[i]);
+			m[i].getHorarioLaboral().cargarHorarioDia(3, 10, 18);
+			m[i].getHorarioLaboral().cargarHorarioDia(5, 10, 16);
+			m[i].addOS("OSDE");
+		}
 		Calendar f = new GregorianCalendar(2022, 5, 3);
 		Turno turno = new Turno(m3, f, 10, p2);
 		m1.anadirTurnos(turno);
@@ -32,24 +45,20 @@ public class Menu {
 			System.out.println("Ingrese: ");
 			System.out.println(" 1 - Para sacar un turno");
 			System.out.println(" 2 - Para ver sus proximos turnos");
-			System.out.println(" 3 - Para ver la lista de medicos");
-			System.out.println(" 4 - Para salir");
+			System.out.println(" 3 - Para salir");
 			try {
 				
-				Scanner opcionTeclado = new Scanner(System.in);
-				opcion = opcionTeclado.nextInt();
+				Scanner sn = new Scanner(System.in);
+				opcion = sn.nextInt();
 				
 				switch (opcion) {
 					case 1:
-						sacarTurno(c1, p1);
+						sacarTurno(c1, p1, sn);
 						break;
 					case 2:
 						mostrarTurnosPaciente(p1);
 						break;
 					case 3:
-						verListaDeMedicos(c1);
-						break;
-					case 4:
 						break;
 					default:
 						System.out.println("Ingresar un numero dentro de los numeros de las opcines");
@@ -62,9 +71,8 @@ public class Menu {
 		System.out.println("Gracias por usar TurnoFacil");
 		// Fin del menu visual
 	}
-	public static void sacarTurno (Clinica c1, Paciente p) {
-		Medico medicoSelec = verListaDeMedicos(c1);
-		System.out.println(medicoSelec.getNombre());
+	public static void sacarTurno (Clinica c1, Paciente p, Scanner sn) {
+		Medico medicoSelec = verListaDeMedicos(c1, sn);
 		if (medicoSelec != null) {
 			medicoSelec.getHorarioLaboral().mostrarHorario();
 			Calendar diaI = Calendar.getInstance();
@@ -73,9 +81,9 @@ public class Menu {
 			while (!salir) {
 				System.out.println("Cargar fecha inicio y fecha fin de busqueda de turno con no mas de 7 dias de diferencia");
 				System.out.println("Cargar fecha inicio");
-				diaI = cargarFecha();
+				diaI = cargarFecha(sn);
 				System.out.println("Cargar fecha fin");
-				diaF = cargarFecha();
+				diaF = cargarFecha(sn);
 				Calendar hoy = Calendar.getInstance();
 				int diferencia = diaF.get(Calendar.DAY_OF_YEAR) - diaI.get(Calendar.DAY_OF_YEAR);
 				if (diaF.get(Calendar.YEAR) > hoy.get(Calendar.YEAR)) 
@@ -87,8 +95,7 @@ public class Menu {
 			try {
 				while (mananaOTarde > 1 || mananaOTarde <  -1) {
 					System.out.println("Ingresa 1 para turnos de solo mañana, -1 para turno de tarde o 0 si no importa");
-					Scanner sn = new Scanner(System.in);
-					mananaOTarde = sn.nextInt();sn.close();
+					mananaOTarde = sn.nextInt();
 				} 
 			}catch(InputMismatchException e) {
 					System.out.println("Se debe ingresar un numero");
@@ -98,9 +105,7 @@ public class Menu {
 				while (opcion > 1 || opcion < 0) {
 					mostrarTurnosDisponibles(medicoSelec, diaI, diaF, mananaOTarde);
 					System.out.println("Ingrese: \n1- Si quieres seleccionar un turno \n2- Si quiere ver turno a 7 dias adelante \n0- Si quiere salir");
-					Scanner sn = new Scanner(System.in);
 					opcion = sn.nextInt();
-					sn.close();
 					System.out.println(opcion);
 					if (opcion == 2) {
 						diaF.add(Calendar.DAY_OF_MONTH, 7);
@@ -109,9 +114,21 @@ public class Menu {
 			}catch(InputMismatchException e) {
 				System.out.println("Se debe ingresar un numero");
 			}
+			if (!medicoSelec.trabajaConObraSocial(p.getObraSocial())) {
+				opcion = 3;
+				try {
+					while (opcion < 1 || opcion > 2) {
+					System.out.println("El medico no trabaja con su obra social");
+					System.out.println("Ingrese: \n1- Si quiere sacar el turno de todas maneras \n2- No desea sacar el turno");
+					opcion = sn.nextInt();
+					}
+				}catch(InputMismatchException e) {
+					System.out.println("Se debe ingresar un numero");
+				}
+			}
 			if (opcion == 1) {
-				Turno t = crearTurno (medicoSelec, p);
-				confirmarDatosPaciente(p);
+				Turno t = crearTurno (medicoSelec, p, sn);
+				confirmarDatosPaciente(p, sn);
 				p.addTurno(t);
 				System.out.println("Se envia email al paciente con el detalle del turno");
 			}
@@ -128,15 +145,14 @@ public class Menu {
 		medicoSelec.mostrarTurnoDisponibleDia(diaI, mananaOTarde);
 	}
 	
-	public static Turno crearTurno (Medico medicoSelec, Paciente p) {
+	public static Turno crearTurno (Medico medicoSelec, Paciente p, Scanner sn) {
 		boolean salir = false;
 		Turno t = new Turno(medicoSelec, null, 0, p);
 		try {
 			while (!salir) {
 				System.out.println("Ingrese la fecha del turno");
-				Calendar fecha = cargarFecha();
+				Calendar fecha = cargarFecha(sn);
 				System.out.println("Ingrese la hora");
-				Scanner sn = new Scanner(System.in);
 				int hora = sn.nextInt();
 				t = new Turno(medicoSelec, fecha, hora, p);
 				if (medicoSelec.turnoDisponible(t))
@@ -144,7 +160,6 @@ public class Menu {
 				else {
 					System.out.println("La fecha o hora ingresada no es un horario del medico disponible");
 				}
-				sn.close();
 			}
 		}catch(InputMismatchException e) {
 			System.out.println("Se debe ingresar un numero");
@@ -152,96 +167,90 @@ public class Menu {
 		return t;
 	}
 	
-	public static Calendar cargarFecha () { // Para cargar una fecha especifica
+	public static Calendar cargarFecha (Scanner parteFecha) { // Para cargar una fecha especifica
 		int dia = 0;
 		int mes = 0;
 		int anio = 0;
-		Scanner parteFecha = new Scanner(System.in);
 		boolean salir = false;
-		while (!salir) {
-				while (dia < 1 || dia > 31) {
-					System.out.println("Introducir dia entre 1 y 31");
-					dia = parteFecha.nextInt();
-				}
-				while (mes < 1 || mes > 13) {
-					System.out.println("Introducir mes entre 1 y 12");
-						mes = parteFecha.nextInt();
-				}
-				while (anio < 2022) {
-					System.out.println("Introducir anio actual o superior");
-					anio = parteFecha.nextInt();
-				}
-				salir = true;
-		}
+		try {
+			while (!salir) {
+					while (dia < 1 || dia > 31) {
+						System.out.println("Introducir dia entre 1 y 31");
+						dia = parteFecha.nextInt();
+					}
+					while (mes < 1 || mes > 13) {
+						System.out.println("Introducir mes entre 1 y 12");
+							mes = parteFecha.nextInt();
+					}
+					while (anio < 2022) {
+						System.out.println("Introducir anio actual o superior");
+						anio = parteFecha.nextInt();
+					}
+					salir = true;
+			}
+		} catch(InputMismatchException e) {
+			System.out.println("Se debe ingresar lo pedido");
+			}
 		Calendar ca = new GregorianCalendar(anio, mes, dia);
 		return ca;
 	}
 	
-    public static void confirmarDatosPaciente(Paciente p){
+    public static void confirmarDatosPaciente(Paciente p, Scanner sn){
         p.mostrarDatos();
-        modificarDatos(p);
+        modificarDatos(p, sn);
     }
     
  
-    public static void modificarDatos(Paciente p){
-        
-        int opcion;
-        Scanner entradaEscaner = new Scanner (System.in); 
-        
-        System.out.println(" Seleccione: ");
-        System.out.println("1 : Modificar Nombre");
-        System.out.println("2 : Modificar Apellido");                              
-        System.out.println("3 : Modificar Direccion");                                
-        System.out.println("4 : Modificar Telefono");                                
-        System.out.println("5 : Modificar Mail");                               
-        System.out.println("6 : Modificar Obra social");                                                             
-        System.out.println("0 : Reconfirmar datos");                                
-        
+    public static void modificarDatos(Paciente p, Scanner sn){
+        int opcion = -1;
         try {
-	        opcion = entradaEscaner.nextInt();
 	        while (opcion != 0){
+	        System.out.println(" Seleccione: ");
+	        System.out.println("1 : Modificar Nombre");
+	        System.out.println("2 : Modificar Apellido");                              
+	        System.out.println("3 : Modificar Direccion");                                
+	        System.out.println("4 : Modificar Telefono");                                
+	        System.out.println("5 : Modificar Mail");                               
+	        System.out.println("6 : Modificar Obra social");                                                             
+	        System.out.println("0 : Reconfirmar datos");                                
+	        opcion = sn.nextInt();
 	            switch(opcion){
 	                case 1 : {
 	                	System.out.println("Ingresar Nombre nuevo"); 
-	                	String entradaTeclado = entradaEscaner.nextLine ();  
-	                	p.setNombre(entradaTeclado); 
+	                	p.setNombre(sn.nextLine()); 
 	                	break;}
 	                case 2 : {
 	                	System.out.println("Ingresar Apellido nuevo");
-	                	String entradaTeclado = entradaEscaner.nextLine (); 
-	                	p.setApellido(entradaTeclado); 
+	                	p.setApellido(sn.nextLine()); 
 	                	break;
 	                	}
 	                case 3 : {
-	                	System.out.println("Ingresar Direccion nuevo");
-	                	String entradaTeclado = entradaEscaner.nextLine ();  
-	                	p.setDireccion(entradaTeclado);
+	                	System.out.println("Ingresar nombre y numero de su direccion de domicilio nuevo");
+	                	p.setDireccion(sn.nextLine());
 	                	break;
 	                	}
 	                case 4 : {
-	                	System.out.println("Ingresar Telefono nuevo");
-	                	int entradaTeclado = entradaEscaner.nextInt();  
-	                	p.setTelefono(entradaTeclado); 
+	                	System.out.println("Ingresar numero Telefono nuevo");
+	                	p.setTelefono(sn.nextInt()); 
 	                	break;
 	                	}
 	                case 5 : {
-	                	System.out.println("Ingresar Mail nuevo");
-	                	String entradaTeclado = entradaEscaner.nextLine ();  
-	                	p.setMail(entradaTeclado); 
+	                	System.out.println("Ingresar Mail nuevo"); 
+	                	p.setMail(sn.nextLine()); 
 	                	break;
 	                }
 	                case 6 : {
-	                	System.out.println("Ingresar Obra Social nuevo");
-	                	String entradaTeclado = entradaEscaner.nextLine ();  
-	                	p.setObraSocial(entradaTeclado); 
+	                	System.out.println("Ingresar nombre Obra Social nuevo");
+	                	p.setObraSocial(sn.nextLine()); 
 	                	break;
 	                }
+	                default:
+	                	System.out.println("Ingresar una opcion mostrada");
 	            }
 	        }
         }catch(InputMismatchException e) {
 			System.out.println("Se debe ingresar lo pedido");
 		}
-        entradaEscaner.close();
     }
     
 	
@@ -257,25 +266,24 @@ public class Menu {
 		}
 	}
 	
-	public static Medico verListaDeMedicos(Clinica c) {
+	public static Medico verListaDeMedicos(Clinica c, Scanner sn) {
 		System.out.println("Seleccione una opcion:");
 		System.out.println("1. Ver lista");
 		System.out.println("2. Filtrar");
 		Medico m = new Medico(null, null, null, null, 0, 0, 0);
-		Scanner entradaEscaner = new Scanner(System.in);
 		try {
-			int opcion = entradaEscaner.nextInt();
+			int opcion = sn.nextInt();
             switch(opcion){
 	            case 1 : {
 	            	Criterio condicion = new CriterioNulo();
-	            	m = c.seleccionarMedico(condicion);
+	            	m = c.seleccionarMedico(condicion, sn);
 	            	break;
 	            }
 	            case 2 : {
 	            	System.out.println("1. Filtrar por especialidad");
 	            	System.out.println("2. Filtrar por obra social");
 	            	System.out.println("3. Cancelar");
-	            	opcion = entradaEscaner.nextInt();
+	            	opcion = sn.nextInt();
 	            	switch (opcion) {
 		            	case 1: {
 		            		System.out.println("Seleccione una especialidad: (0 para volver)");
@@ -285,10 +293,10 @@ public class Menu {
 		            			System.out.println(nro + ". " + e);
 		            			nro++;
 		            		}
-		            		opcion = entradaEscaner.nextInt();
+		            		opcion = sn.nextInt();
 		            		if (opcion == 0) break;
 		            		Criterio condicion = new CriterioEspecialidad(especialidades.get(opcion-1));
-		            		m = c.seleccionarMedico(condicion);
+		            		m = c.seleccionarMedico(condicion, sn);
 		            		break;
 		            	}
 		            	case 2: {
@@ -299,10 +307,10 @@ public class Menu {
 		            			System.out.println(nro + ". " + os);
 		            			nro++;
 		            		}
-		            		opcion = entradaEscaner.nextInt();
+		            		opcion = sn.nextInt();
 		            		if (opcion == 0) break;
 		            		Criterio condicion = new CriterioObraSocial(obrasSociales.get(opcion-1));
-		            		m = c.seleccionarMedico(condicion);
+		            		m = c.seleccionarMedico(condicion, sn);
 		            		break;
 		            	}
 		            	case 3: {

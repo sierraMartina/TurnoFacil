@@ -106,12 +106,14 @@ public class Paciente {
 	}
 	
     public void  mostrarDatos(){
-        System.out.print("Nombre: " + nombre + " ");
-        System.out.print("Apellido: " + apellido+ " ");
-        System.out.print("Direccion: " + direccion+ " ");
-        System.out.print("Telefono: " + telefono+ " ");
-        System.out.print("Mail: " + mail+ " ");
-        System.out.print("ObraSocial: " + obraSocial+ " ");
-        System.out.print("NumeroDeAfiliado:" + numeroDeAfiliado);
+    	System.out.println("\n");
+    	System.out.println("DATOS:");
+        System.out.println("Nombre: " + nombre + " ");
+        System.out.println("Apellido: " + apellido+ " ");
+        System.out.println("Direccion: " + direccion+ " ");
+        System.out.println("ObraSocial: " + obraSocial+ " ");
+        System.out.println("Mail: " + mail+ " ");
+        System.out.println("Telefono: " + telefono+ " ");
+        System.out.println("NumeroDeAfiliado:" + numeroDeAfiliado + "\n");
     }
 }

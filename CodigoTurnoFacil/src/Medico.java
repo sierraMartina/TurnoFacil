@@ -173,8 +173,12 @@ public class Medico implements Comparable<Medico>{
 	
 	public boolean turnoDisponible (Turno turno) {
 		if (!turnos.contains(turno)) {
-			if (horarioLaboral.trabaja(turno.getFecha().get(Calendar.DAY_OF_WEEK), turno.getHora()))
+			if (horarioLaboral.trabaja(turno.getFecha().get(Calendar.DAY_OF_WEEK)-1, turno.getHora()))
 				return true;
+			else {
+				System.out.println("No trabaja en ese horario");
+				return false;
+			}
 		}
 		return false;
 	}

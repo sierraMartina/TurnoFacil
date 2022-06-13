@@ -34,7 +34,7 @@ public class Clinica {
 		}
 	}
 	
-	public Medico seleccionarMedico (Criterio c) {
+	public Medico seleccionarMedico (Criterio c, Scanner sn) {
 		List<Medico> listaFiltrada = new ArrayList<>();
 		for (Medico m: medicos) {
 			if (c.cumple(m)){
@@ -49,7 +49,7 @@ public class Clinica {
 		while (posicion < listaFiltrada.size() && !eligio) {
 			if ((posicion + 10) < listaFiltrada.size()) // como mostramos de a 10 medicos miramos si hay 10 medicos para mostrar sino mostramos la cantidad que hay
 				cantMovimiento = posicion + 10;
-			else {cantMovimiento = listaFiltrada.size() - posicion;}
+			else {cantMovimiento = listaFiltrada.size();}
 			System.out.println("Medicos :");
 			while (posicion < cantMovimiento) {// mostramos los medicos con el numero de posicion
 				System.out.println((posicion+1) + ". " + listaFiltrada.get(posicion).toString());
@@ -60,8 +60,7 @@ public class Clinica {
 			while (!salir) { // Aca hacemos que seleccione uno de los medicos mostrados o pasar a la siguiente pagina de medicos
 				try {
 					System.out.println("Ingresar un numero de medico o 0 para pasar a la siguiente pagina");
-					Scanner opcionTeclado = new Scanner(System.in);
-					seleccionar = opcionTeclado.nextInt();
+					seleccionar = sn.nextInt();
 					if (seleccionar == 0)
 						salir = true;
 					else {
