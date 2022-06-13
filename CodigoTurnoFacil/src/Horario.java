@@ -13,17 +13,17 @@ public class Horario {
 		}
 	}
 	
-	public void cargarHorarioDia (int Dia, int horaInicio, int horaFin) {
+	public void cargarHorarioDia (int dia, int horaInicio, int horaFin) {
 		boolean horarioYaCargado = false;
 		int i = 0;
 		while (i<24 && !horarioYaCargado) {
-			if (horarioLaboral[i][Dia] == true)
+			if (horarioLaboral[i][dia] == true)
 				horarioYaCargado = true;
 			i++;
 		}
 		if (!horarioYaCargado) {
 			for (i = horaInicio -1; i< horaFin; i++) {
-				horarioLaboral[i][Dia] = true;
+				horarioLaboral[i][dia] = true;
 			}
 		}
 		else {
@@ -31,17 +31,17 @@ public class Horario {
 		}
 	}
 	
-	public void clearHorarioDia (int Dia) {
+	public void clearHorarioDia (int dia) {
 		for (int i = 0; i< 24; i++) {
-			horarioLaboral[i][Dia] = false;
+			horarioLaboral[i][dia] = false;
 		}
 	}
 	
-	public int horaIncioDia (int Dia) {
+	public int horaIncioDia (int dia) {
 		boolean trabaja = false;
 		int i = 0;
 		while (i <24 && trabaja != true) {
-			if (horarioLaboral[i][Dia] == true)
+			if (horarioLaboral[i][dia] == true)
 				trabaja = true;
 			i++;
 		}
@@ -52,17 +52,17 @@ public class Horario {
 		}
 	}
 	
-	public int horaFinDia (int Dia) {
+	public int horaFinDia (int dia) {
 		boolean trabaja = false;
 		int i = 0;
 		while (i <24 && trabaja != true) {
-			if (horarioLaboral[i][Dia] == true)
+			if (horarioLaboral[i][dia] == true)
 				trabaja = true;
 			i++;
 		}
 		if (trabaja == true) {
 			while (i <24) {
-				if (horarioLaboral[i][Dia] == false)
+				if (horarioLaboral[i][dia] == false)
 					return i;
 				i++;
 			}
