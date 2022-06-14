@@ -106,7 +106,7 @@ public class Clinica {
 	}
 	
 	public void addTurno (Turno turno) {
-		if (turnos.contains(turno)) {
+		if (!turnos.contains(turno)) {
 			turnos.add(turno);
 			turno.getMedico().anadirTurnos(turno);
 			turno.getPaciente().setTurnos(turno);

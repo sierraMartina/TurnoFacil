@@ -127,7 +127,7 @@ public class Menu {
 			if (opcion == 1) {
 				Turno t = crearTurno (medicoSelec, p, sn);
 				confirmarDatosPaciente(p, sn);
-				p.addTurno(t);
+				c1.addTurno(t);
 				System.out.println("Se envia email al paciente con el detalle del turno");
 			}
 		}
