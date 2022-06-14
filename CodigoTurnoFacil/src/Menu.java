@@ -112,7 +112,7 @@ public class Menu {
 			}catch(InputMismatchException e) {
 				System.out.println("Se debe ingresar un numero");
 			}
-			if (!medicoSelec.trabajaConObraSocial(p.getObraSocial())) {
+			if (!medicoSelec.trabajaConObraSocial(p.getObraSocial()) && opcion != 0) {
 				opcion = 3;
 				try {
 					while (opcion < 1 || opcion > 2) {
