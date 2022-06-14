@@ -28,7 +28,7 @@ public class Menu {
 		m1.getHorarioLaboral().cargarHorarioDia(3, 10, 18);
 		m1.getHorarioLaboral().cargarHorarioDia(5, 10, 20);
 		m1.addOS("OSDE");
-		for (int i =0; i < m.length; i++) {
+		for (int i =1; i < m.length; i++) {
 			c1.addMedico(m[i]);
 			m[i].getHorarioLaboral().cargarHorarioDia(3, 10, 18);
 			m[i].getHorarioLaboral().cargarHorarioDia(5, 10, 16);
@@ -105,7 +105,6 @@ public class Menu {
 					mostrarTurnosDisponibles(medicoSelec, diaI, diaF, mananaOTarde);
 					System.out.println("Ingrese: \n1- Si quieres seleccionar un turno \n2- Si quiere ver turno a 7 dias adelante \n0- Si quiere salir");
 					opcion = sn.nextInt();
-					System.out.println(opcion);
 					if (opcion == 2) {
 						diaF.add(Calendar.DAY_OF_MONTH, 7);
 					}
@@ -278,7 +277,7 @@ public class Menu {
 		System.out.println("Seleccione una opcion:");
 		System.out.println("1. Ver lista");
 		System.out.println("2. Filtrar");
-		Medico m = new Medico(null, null, null, null, 0, 0, 0);
+		Medico m = new Medico("no usar", null, null, null, 0, 0, 0);
 		try {
 			int opcion = sn.nextInt();
             switch(opcion){
@@ -322,6 +321,7 @@ public class Menu {
 		            		break;
 		            	}
 		            	case 3: {
+		            		m = null;
 		            		break;
 		            	}
 	            	}
