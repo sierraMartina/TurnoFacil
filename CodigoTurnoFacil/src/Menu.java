@@ -216,18 +216,18 @@ public class Menu {
 	            switch(opcion){
 	                case 1 : {
 	                	System.out.println("Ingresar Nombre nuevo"); 
-	                	aux = sn.nextLine();
+	                	aux = sn.next();
 	                	p.setNombre(aux); 
 	                	break;}
 	                case 2 : {
 	                	System.out.println("Ingresar Apellido nuevo");
-	                	aux = sn.nextLine();
+	                	aux = sn.next();
 	                	p.setApellido(aux); 
 	                	break;
 	                	}
 	                case 3 : {
 	                	System.out.println("Ingresar nombre y numero de su direccion de domicilio nuevo");
-	                	aux = sn.nextLine();
+	                	aux = sn.next();
 	                	p.setDireccion(aux);
 	                	break;
 	                	}
@@ -238,13 +238,13 @@ public class Menu {
 	                	}
 	                case 5 : {
 	                	System.out.println("Ingresar Mail nuevo"); 
-	                	aux = sn.nextLine();
+	                	aux = sn.next();
 	                	p.setMail(aux); 
 	                	break;
 	                }
 	                case 6 : {
 	                	System.out.println("Ingresar nombre Obra Social nuevo");
-	                	aux = sn.nextLine();
+	                	aux = sn.next();
 	                	p.setObraSocial(aux); 
 	                	break;
 	                }
