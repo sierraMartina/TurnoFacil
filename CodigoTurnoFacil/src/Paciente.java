@@ -99,11 +99,6 @@ public class Paciente {
 	public void borrarTurno (Turno turno) {
 		turnos.remove(turno);
 	}
-
-	public void setTurnos(Turno turno) {
-		if (turnos.contains(turno))
-			turnos.add(turno);
-	}
 	
     public void  mostrarDatos(){
     	System.out.println("\n");
