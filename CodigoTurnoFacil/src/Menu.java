@@ -34,9 +34,6 @@ public class Menu {
 			m[i].getHorarioLaboral().cargarHorarioDia(5, 10, 16);
 			m[i].addOS("OSDE");
 		}
-		for (int i =5; i < m.length; i++) {
-			m[i].addOS("IOMA");
-		}
 		Calendar f = new GregorianCalendar(2022, 5, 3);
 		Turno turno = new Turno(m3, f, 10, p2);
 		m1.anadirTurnos(turno);
@@ -218,9 +215,6 @@ public class Menu {
 	        System.out.println("0 : Reconfirmar datos");                                
 	        opcion = sn.nextInt();
 	            switch(opcion){
-	            	case 0:{
-	            		break;
-	            	}
 	                case 1 : {
 	                	System.out.println("Ingresar Nombre nuevo"); 
 	                	p.setNombre(sn.nextLine()); 

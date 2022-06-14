@@ -1,14 +1,14 @@
 
 public class CriterioObraSocial implements Criterio{
-	private String obraSocial;
+	String OS;
 	
 	public CriterioObraSocial(String oS) {
 		super();
-		obraSocial = oS;
+		OS = oS;
 	}
 
 	@Override
 	public boolean cumple(Medico m) {
-		return m.trabajaConObraSocial(obraSocial);
+		return m.trabajaConObraSocial(OS);
 	}
 }
