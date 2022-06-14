@@ -1,0 +1,7 @@
+# _Como paciente quiero seleccionar un médico para poder ver sus días de atención_
+
+¿Qué se pretende que haga? | ¿Qué hace? | Resultado | Datos que tiene el sistema | Datos de entrada | Salida Esperada | Salida obteneida (Descripción o imagen) | Comentarios (Opcional)
+--- | --- | --- | --- | --- | --- | --- | ---
+_Se debe poder seleccionar un médico de la lista_ | _El paciente ingresa el numero de uno de les medicos mostrados_ | _Cumple_ | _"Marta", "Mendez", 14, 1, "Saavedra 122", "OSDE", "holi@gmail.com") y, Medico: m1("jorge", "Ban", "esp1", "dir1", 11, 1, 1), m2 ("Catalina", "Rivera", "esp2", "dir1", 11, 1, 2) y ("Medio", "Dia", "esp1", "dir1", 11, 1, 3)_ | _Ingresamos el numero 1_ | _Se muestran los horarios que trabaja el medico seleccionado_ | _Se muestra sus horarios_ | _Comentario breve_ 
+_Se debe poder ver los horarios del médico_ | _Luego de haber seleccionado el medico se muestran sus horarios en los que trabaja_ | _Cumple_ | _Todo de los datos del punto anterior y  horarios agregados para el medico m1.getHorarioLaboral().cargarHorarioDia(1, 8, 16) y m1.getHorarioLaboral().cargarHorarioDia(3, 8, 16)_ |_No se ingresa nada_|_Se espera que muestre en este caso que " Lunes trabaja de 8 a 16; Miercoles trabaja de 8 a 16"_| _Se obtuvo el mensaje esperado " Lunes trabaja de 8 a 16; Miercoles trabaja de 8 a 16"_ | _Comentario breve_ 
+--- | --- | --- | --- | --- | --- | --- | ---
