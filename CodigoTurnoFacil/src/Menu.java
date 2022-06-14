@@ -84,9 +84,8 @@ public class Menu {
 				diaI = cargarFecha(sn);
 				System.out.println("Cargar fecha fin");
 				diaF = cargarFecha(sn);
-				Calendar hoy = Calendar.getInstance();
 				int diferencia = diaF.get(Calendar.DAY_OF_YEAR) - diaI.get(Calendar.DAY_OF_YEAR);
-				if (diaF.get(Calendar.YEAR) > hoy.get(Calendar.YEAR)) 
+				if (diaF.get(Calendar.YEAR) > diaI.get(Calendar.YEAR) && diaF.get(Calendar.MONTH) == diaI.get(Calendar.MONTH)) 
 					diferencia = diferencia + 360;
 				if (diferencia > -1 && diferencia < 8)
 					salir = true;
@@ -214,19 +213,23 @@ public class Menu {
 	        System.out.println("6 : Modificar Obra social");                                                             
 	        System.out.println("0 : Reconfirmar datos");                                
 	        opcion = sn.nextInt();
+	        String aux = " ";
 	            switch(opcion){
 	                case 1 : {
 	                	System.out.println("Ingresar Nombre nuevo"); 
-	                	p.setNombre(sn.nextLine()); 
+	                	aux = sn.nextLine();
+	                	p.setNombre(aux); 
 	                	break;}
 	                case 2 : {
 	                	System.out.println("Ingresar Apellido nuevo");
-	                	p.setApellido(sn.nextLine()); 
+	                	aux = sn.nextLine();
+	                	p.setApellido(aux); 
 	                	break;
 	                	}
 	                case 3 : {
 	                	System.out.println("Ingresar nombre y numero de su direccion de domicilio nuevo");
-	                	p.setDireccion(sn.nextLine());
+	                	aux = sn.nextLine();
+	                	p.setDireccion(aux);
 	                	break;
 	                	}
 	                case 4 : {
@@ -236,12 +239,17 @@ public class Menu {
 	                	}
 	                case 5 : {
 	                	System.out.println("Ingresar Mail nuevo"); 
-	                	p.setMail(sn.nextLine()); 
+	                	aux = sn.nextLine();
+	                	p.setMail(aux); 
 	                	break;
 	                }
 	                case 6 : {
 	                	System.out.println("Ingresar nombre Obra Social nuevo");
-	                	p.setObraSocial(sn.nextLine()); 
+	                	aux = sn.nextLine();
+	                	p.setObraSocial(aux); 
+	                	break;
+	                }
+	                case 0 : {
 	                	break;
 	                }
 	                default:
