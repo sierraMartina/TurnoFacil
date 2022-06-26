@@ -1,28 +1,66 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Paciente extends Persona {
+public class Paciente {
+	private String nombre;
+	private String apellido;
+	private int telefono;
 	private int numeroDeAfiliado;
+	private String direccion;
 	private String obraSocial;
+	private String mail;
 	private List<Turno> turnos = new ArrayList<>();
-	private String nombreEnCasoDeNoTenerOS = "NO TIENE";
 	
-	
-
-	public Paciente(String nombre, String apellido, int telefono, String mail, String direccion, int dni,
-			int numeroDeAfiliado) {
-		super(nombre, apellido, telefono, mail, direccion, dni);
+	public Paciente(String nombre, String apellido, int telefono, int numeroDeAfiliado, String direccion,
+			String obraSocial, String mail) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
 		this.numeroDeAfiliado = numeroDeAfiliado;
-		obraSocial = nombreEnCasoDeNoTenerOS;
+		this.direccion = direccion;
+		this.obraSocial = obraSocial;
+		this.mail = mail;
 	}
 
-	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
 	public int getNumeroDeAfiliado() {
 		return numeroDeAfiliado;
 	}
 
 	public void setNumeroDeAfiliado(int numeroDeAfiliado) {
 		this.numeroDeAfiliado = numeroDeAfiliado;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 	public String getObraSocial() {
@@ -32,38 +70,50 @@ public class Paciente extends Persona {
 	public void setObraSocial(String obraSocial) {
 		this.obraSocial = obraSocial;
 	}
-	
-	public void deleteObraSocial () {
-		obraSocial = nombreEnCasoDeNoTenerOS;
+
+	public String getMail() {
+		return mail;
 	}
 
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 
 	public void addTurno(Turno t) {
 		turnos.add(t);
 	}
 	
-	public List<Turno> getTurno (FiltroTurno f){
-		List<Turno> turnosDevolver = new ArrayList<>();
-		for (Turno t : turnos) {
-			if (f.cumple(t))
-				turnosDevolver.add(t);
+	public Turno getTurnos(int posicion) {
+		if (posicion > -1 && posicion < turnos.size())
+			return turnos.get(posicion);
+		else {
+			System.out.println("No existe turno en esa posicion");
+			return null;
 		}
-		return turnosDevolver;
+	}
+	
+	public List<Turno> getListTurnos(){
+		return turnos;
 	}
 	
 	public void borrarTurno (Turno turno) {
 		turnos.remove(turno);
 	}
+
+	public void setTurnos(Turno turno) {
+		if (turnos.contains(turno))
+			turnos.add(turno);
+	}
 	
     public void  mostrarDatos(){
     	System.out.println("\n");
     	System.out.println("DATOS:");
-        System.out.println("Nombre: " + this.getNombre() + " ");
-        System.out.println("Apellido: " + this.getApellido()+ " ");
-        System.out.println("Direccion: " + this.getDireccion()+ " ");
+        System.out.println("Nombre: " + nombre + " ");
+        System.out.println("Apellido: " + apellido+ " ");
+        System.out.println("Direccion: " + direccion+ " ");
         System.out.println("ObraSocial: " + obraSocial+ " ");
-        System.out.println("Mail: " + this.getMail()+ " ");
-        System.out.println("Telefono: " + this.getTelefono()+ " ");
+        System.out.println("Mail: " + mail+ " ");
+        System.out.println("Telefono: " + telefono+ " ");
         System.out.println("NumeroDeAfiliado:" + numeroDeAfiliado + "\n");
     }
 }

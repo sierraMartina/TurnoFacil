@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Clinica {
-	private List<Paciente> pacientes = new ArrayList<>();
-	private List<Secretaria> secretarias = new ArrayList<>();
 	private List<Medico> medicos = new ArrayList<>();
 	private List<Turno> turnos = new ArrayList<>();
 	
@@ -20,18 +18,18 @@ public class Clinica {
 		}
 	}
 	
-	public List<Medico> getMedico (FiltrarPersonas fp) {
-		List<Medico> medicosADevolver = new ArrayList<>();
-		for (Medico m: medicos) {
-			if (fp.cumple(m))
-				medicosADevolver.add(m);
+	public Medico getMedico (int dni) {
+		Medico medico = null;
+		for (Medico m : medicos) {
+			if (m.getDni() == dni)
+				medico = m;
 		}
-		return medicosADevolver;
+		return medico;
 	}
 	
-	public void removeMedico (FiltrarPersonas fp) {
+	public void removeMedico (int dni) {
 		for (Medico m : medicos) {
-			if (fp.cumple(m))
+			if (m.getDni() == dni)
 				medicos.remove(m);
 		}
 	}
@@ -86,49 +84,6 @@ public class Clinica {
 		}
 	}
 	
-	public List<Paciente> getPaciente (FiltrarPersonas fp) {
-		List<Paciente> pacientesADevolver = new ArrayList<>();
-		for (Paciente p: this.pacientes) {
-			if (fp.cumple(p))
-				pacientesADevolver.add(p);
-		}
-		return pacientesADevolver;
-	}
-	
-	public void addPaciente (Paciente p) {
-		if (!pacientes.contains(p)) {
-			pacientes.add(p);
-		}
-	}
-	
-	public void removePersona (FiltrarPersonas fp) {
-		for (Paciente p : pacientes) {
-			if (fp.cumple(p))
-				pacientes.remove(p);
-		}
-	}
-	
-	public List<Secretaria> getSecretaria (FiltrarPersonas fp) {
-		List<Secretaria> secretariasADevolver = new ArrayList<>();
-		for (Secretaria s: this.secretarias) {
-			if (fp.cumple(s))
-				secretariasADevolver.add(s);
-		}
-		return secretariasADevolver;
-	}
-	
-	public void addSecretaria (Secretaria s) {
-		if (!secretarias.contains(s)) {
-			secretarias.add(s);
-		}
-	}
-	
-	public void removeSecretaria (FiltrarPersonas fp) {
-		for (Secretaria s : secretarias) {
-			if (fp.cumple(s))
-				secretarias.remove(s);
-		}
-	}
 	
 	public List<String> getEspecialidades () {
 		List<String> esp = new ArrayList<>();
@@ -142,20 +97,19 @@ public class Clinica {
 	public List<String> getObraSocial () {
 		List<String> oS = new ArrayList<>();
 		for (Medico m: medicos) {
-			List<String> oSDeUnMedico = m.getOS();
-			for (int i = 0; i < oSDeUnMedico.size(); i++) {
-				if (!oS.contains(oSDeUnMedico.get(i)))
-					oS.add(oSDeUnMedico.get(i));
+			for (int i = 0; i < m.cantObraSocial(); i++) {
+				if (!oS.contains(m.getOS(i)))
+					oS.add(m.getOS(i));
 			}
 		}
 		return oS;
 	}
 	
 	public void addTurno (Turno turno) {
-		if (!turnos.contains(turno)) {
+		if (turnos.contains(turno)) {
 			turnos.add(turno);
 			turno.getMedico().anadirTurnos(turno);
-			turno.getPaciente().addTurno(turno);
+			turno.getPaciente().setTurnos(turno);
 		}
 	}
 	
