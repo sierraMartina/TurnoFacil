@@ -21,8 +21,8 @@ public class Secretaria extends Personal {
 	}
 
 
-	public void setMedicosACargo(Medico m) {
-		if (medicosACargo.contains(m))
+	public void addMedicosACargo(Medico m) {
+		if (!medicosACargo.contains(m))
 			medicosACargo.add(m);
 	}
 	
