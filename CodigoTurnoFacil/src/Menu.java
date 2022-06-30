@@ -28,6 +28,8 @@ public class Menu {
 		Medico [] m = {m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12};
 		Secretaria s1 = new Secretaria("Susan", "Hernandez", 545, "mail", "dir", 1, "123");
 		Secretaria s2 = new Secretaria("Ana", "Fernandez", 545, "mail", "dir", 2, "123");
+		s1.addMedicosACargo(m3);
+		s2.addMedicosACargo(m11);
 		c1.addSecretaria(s2);
 		c1.addSecretaria(s1);
 		c1.addPaciente(p1);
@@ -44,17 +46,21 @@ public class Menu {
 		}
 		Scanner sn = new Scanner(System.in);
 		Calendar f = new GregorianCalendar(2022, 5, 3);
-		Turno turno = new Turno(m3, f, 10, p2);
+		Turno turno = new Turno(m3, f, 10, p1);
 		Turno turno1 = new Turno(m2, f, 12, p1);
+		Turno turno2 = new Turno(m11, f, 8, p1);
+		Turno turno3 = new Turno(m11, f, 7, p1);
 		c1.addTurno(turno1);
 		c1.addTurno(turno);
+		c1.addTurno(turno2);
+		c1.addTurno(turno3);
 		
 		
 		// MENU INGRESO
 		int opcion = 0;
 		while (opcion != 3) { 
 			System.out.println("Bienvenido a TurnoFacil");
-			System.out.println("Ingrese: \n1 para ingresar como Paciente \n2 Para ingresar como Secretaria \n3 Para salir");
+			System.out.println("Ingrese: \n1 Para ingresar como Paciente \n2 Para ingresar como Secretaria \n3 Para salir");
 			try {
 				opcion = sn.nextInt();
 				
@@ -117,7 +123,28 @@ public class Menu {
 	
 	// MENU SECRETARIA
 	public static void menuSecretaria (Clinica c, Secretaria s, Scanner sn) {
-		System.out.println("Entro"); // Esto lo puse para probar que entre, cuando creen el menu de la secretaria borrenlo
+		int opcion = 0;
+		while (opcion != 2) { 
+			System.out.println("Ingrese: ");
+			System.out.println(" 1 - Ver los turnos de un paciente ");
+			System.out.println(" 2 - Para salir");
+			try {
+				opcion = sn.nextInt();
+				
+				switch (opcion) {
+					case 1:
+						 getTurnosPaciente(c, s, sn);			
+						break;
+					case 2:
+						break;
+					default:
+						System.out.println("Ingresar un numero dentro de los numeros de las opcines");
+					}
+				}
+			    catch(InputMismatchException e) {
+				System.out.println("Se debe ingresar un numero");
+			}
+		}
 	}
 	
 	// METODOS
@@ -493,5 +520,15 @@ public class Menu {
 		return m;
 	}
 	
-		
+	public static void getTurnosPaciente(Clinica c, Secretaria s, Scanner sn) {
+		Paciente p1 = ingresarComoPaciente(c, sn);
+		if (p1 != null) {
+			Criterio cri = new CSiempreTrue();
+			FiltroTurno filtro = new FTMedicos(s.getMedicosACargo(cri));
+			Turno t = SeleccionarTurnos(p1, sn, filtro);
+			if (t != null) {
+				modificarTurno(c, t, sn);
+			}
+		}
+	}
 }
