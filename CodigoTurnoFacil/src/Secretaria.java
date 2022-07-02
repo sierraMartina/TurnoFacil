@@ -39,12 +39,7 @@ public class Secretaria extends Personal {
 		}
 		return turnos; 
 	}
-	
-	public boolean existeMedico(Medico m) {
-		for(int i=0; i<medicosACargo.size(); i++) {
-			if(medicosACargo.get(i).compareTo(m) == 0)
-				return true;
-		}
-		return false;
+	public boolean aCargoDeMedico(Medico m) {
+		return medicosACargo.contains(m);
 	}
 }
