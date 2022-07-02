@@ -40,5 +40,9 @@ public class Secretaria extends Personal {
 		return turnos; 
 	}
 	
+	public boolean aCargoDeMedico(Medico m) {
+		return medicosACargo.contains(m);
+	}
+	
 
 }
