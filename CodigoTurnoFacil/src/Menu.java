@@ -124,10 +124,11 @@ public class Menu {
 	// MENU SECRETARIA
 	public static void menuSecretaria (Clinica c, Secretaria s, Scanner sn) {
 		int opcion = 0;
-		while (opcion != 2) { 
+		while (opcion != 3) { 
 			System.out.println("Ingrese: ");
 			System.out.println(" 1 - Ver los turnos de un paciente ");
-			System.out.println(" 2 - Para salir");
+			System.out.println(" 2 - Cargar un nuevo turno");
+			System.out.println(" 3 - Para salir");
 			try {
 				opcion = sn.nextInt();
 				
@@ -136,6 +137,9 @@ public class Menu {
 						 getTurnosPaciente(c, s, sn);			
 						break;
 					case 2:
+						 cargarNuevoTurno(c, s, sn);
+						break;
+					case 3:
 						break;
 					default:
 						System.out.println("Ingresar un numero dentro de los numeros de las opcines");
@@ -530,5 +534,66 @@ public class Menu {
 				modificarTurno(c, t, sn);
 			}
 		}
+	}
+	
+	public static void cargarNuevoTurno(Clinica c, Secretaria s, Scanner sn) {
+		 
+		int opcion;
+		System.out.println("Seleccione una opcion: ");
+		System.out.println(" 1: Seleccionar paciente registrado");
+		System.out.println(" 2: Registrar paciente nuevo");
+		System.out.println(" 3: Volver al menu");
+		int opcion = sn.nextInt();
+		while(opcion != 3)
+			switch(opcion) {
+				case 1:{
+					System.out.printl("Ingrese DNI del paciente");
+					Scanner dni = new Scanner(System.in);
+					dni = dni.nextInt();
+					Paciente p = buscarPaciente(dni);
+					Medico m = c.seleccionarMedico(null, null);
+					if(p != null && s.existeMedico(m)) {
+						Turno t = crearTurno(m, p, sn);
+						c.addTurno(t);
+					}
+					else
+						System.out.printl("No existe un paciente con ese DNI");
+				}
+					
+					break;
+				case 2:{
+					registrarPaciente(c, sn);
+					break;
+				}	
+				case 3:
+					break;
+			}
+	}
+	
+	public static void registrarPaciente(Clinica c, Scanner sn) {
+		Paciente p = new Paciente("","", 0, "", "", 0, 0); 
+        String aux;
+    	System.out.println("Ingresar Nombre"); 
+    	aux = sn.next();
+    	p.setNombre(aux); 
+    	System.out.println("Ingresar Apellido");
+    	aux = sn.next();
+    	p.setApellido(aux); 
+    	System.out.println("Ingresar nombre y numero de su direccion de domicilio");
+    	aux = sn.next();
+    	p.setDireccion(aux);
+    	System.out.println("Ingresar numero Telefono");
+    	p.setTelefono(sn.nextInt()); 
+    	System.out.println("Ingresar Mail"); 
+    	aux = sn.next();
+    	p.setMail(aux); 
+    	System.out.println("Ingresar nombre Obra Social");
+    	aux = sn.next();
+    	p.setObraSocial(aux); 
+    	System.out.println("Ingresar nombre dni");
+    	p.dni(sn.nextInt()); 
+    	System.out.println("Ingresar nombre nro Afiliado");
+    	p.setNumeroDeAfiliado(sn.nextInt()); 
+    	c.addPaciente(p);
 	}
 }

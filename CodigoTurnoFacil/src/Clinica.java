@@ -167,4 +167,11 @@ public class Clinica {
 		}
 	}
 	
+	public Paciente buscarPaciente(int dni) {
+		for(int i=0; i<pacientes.size(); i++) {
+			if(pacientes.get(i).getDni() == dni)
+				return pacientes.get(i);
+		}
+		return null;
+	}
 }
