@@ -29,6 +29,9 @@ public class Menu {
 		Secretaria s1 = new Secretaria("Susan", "Hernandez", 545, "mail", "dir", 1, "123");
 		Secretaria s2 = new Secretaria("Ana", "Fernandez", 545, "mail", "dir", 2, "123");
 		s1.addMedicosACargo(m3);
+		s1.addMedicosACargo(m5);
+		s1.addMedicosACargo(m2);
+		s2.addMedicosACargo(m6);
 		s2.addMedicosACargo(m11);
 		c1.addSecretaria(s2);
 		c1.addSecretaria(s1);
@@ -43,18 +46,26 @@ public class Menu {
 			m[i].getHorarioLaboral().cargarHorarioDia(3, 10, 18);
 			m[i].getHorarioLaboral().cargarHorarioDia(5, 10, 16);
 			m[i].addOS("OSDE");
+			if (i%2 == 0)
+				m[i].addOS("IOMA");
 		}
 		Scanner sn = new Scanner(System.in);
-		Calendar f = new GregorianCalendar(2022, 5, 3);
-		Turno turno = new Turno(m3, f, 10, p1);
-		Turno turno1 = new Turno(m2, f, 12, p1);
-		Turno turno2 = new Turno(m11, f, 8, p1);
-		Turno turno3 = new Turno(m11, f, 7, p1);
-		c1.addTurno(turno1);
-		c1.addTurno(turno);
-		c1.addTurno(turno2);
-		c1.addTurno(turno3);
-		
+		Calendar f1 = new GregorianCalendar(2022, 5, 3);
+		Calendar f2 = new GregorianCalendar(2022, 5, 8);
+		Turno turno = new Turno(m3, f1, 10, p1);
+		Turno turno1 = new Turno(m2, f1, 12, p1);
+		Turno turno2 = new Turno(m11, f1, 10, p2);
+		Turno turno3 = new Turno(m11, f2, 17, p1);
+		Turno turno4 = new Turno(m5, f1, 15, p2);
+		Turno turno5 = new Turno(m6, f2, 11, p2);
+		Turno turno6 = new Turno(m2, f2, 16, p1);
+		Turno turno7 = new Turno(m3, f1, 15, p2);
+		Turno turno8 = new Turno(m6, f2, 15, p2);
+		Turno turno9 = new Turno(m5, f2, 11, p1);
+		Turno [] t =  {turno, turno1, turno2, turno3, turno4, turno5, turno6, turno7, turno8, turno9};
+		for (int i =0; i < t.length; i++) {
+			c1.addTurno(t[i]);
+		}
 		
 		// MENU INGRESO
 		int opcion = 0;
@@ -101,7 +112,9 @@ public class Menu {
 				
 				switch (opcion) {
 					case 1:
-						sacarTurno(c1, p1, sn);
+						Medico medicoSelec = verListaDeMedicos(c1, sn);
+						if (medicoSelec != null)
+							sacarTurno(c1, p1, sn, medicoSelec);
 						break;
 					case 2:
 						FTMostrarTurnos filtro = new FTMostrarTurnos();
@@ -217,9 +230,7 @@ public class Menu {
 		}
 	}
 	
-	public static void sacarTurno (Clinica c1, Paciente p, Scanner sn) {
-		Medico medicoSelec = verListaDeMedicos(c1, sn);
-		if (medicoSelec != null) {
+	public static void sacarTurno (Clinica c1, Paciente p, Scanner sn, Medico medicoSelec) {
 			medicoSelec.getHorarioLaboral().mostrarHorario();
 			Calendar diaI = Calendar.getInstance();
 			Calendar diaF = Calendar.getInstance();
@@ -276,7 +287,6 @@ public class Menu {
 				c1.addTurno(t);
 				System.out.println("Se envia email al paciente con el detalle del turno");
 			}
-		}
 	}
 	
 	public static void modificarTurno (Clinica c1, Turno t, Scanner sn) {
@@ -436,7 +446,7 @@ public class Menu {
 					turnosAMostrar += 10;
 				else {turnosAMostrar = turnos.size();}
 				for(posicion = 0; posicion < turnosAMostrar; posicion++) {
-					System.out.println("Turno n�  " + (posicion+1) + ": " + turnos.get(posicion).toString());
+					System.out.println("Turno nro  " + (posicion+1) + ": " + turnos.get(posicion).toString());
 				}
 				boolean salir = false;
 				while (!salir) { // Aca hacemos que seleccione uno de los turnos mostrados
@@ -476,7 +486,7 @@ public class Menu {
 			int opcion = sn.nextInt();
             switch(opcion){
 	            case 1 : {
-	            	Criterio condicion = new CriterioNulo();
+	            	Criterio condicion = new CSiempreTrue();
 	            	m = c.seleccionarMedico(condicion, sn);
 	            	break;
 	            }
