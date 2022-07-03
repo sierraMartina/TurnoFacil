@@ -11,8 +11,8 @@ public class Menu {
 	public static void main(String[] args) {
 		// DATOS CARGADOS
 		Clinica c1 = new Clinica();
-		Paciente p1 = new Paciente("yo", "soy", 14, "tu", "padre", 123456789, 1);
-		Paciente p2 = new Paciente("Soy", "otro", 15, "otro", "paciente", 987654321, 2);
+		Paciente p1 = new Paciente("yo", "soy", 14, "tu", "padre", 123456789);
+		Paciente p2 = new Paciente("Soy", "otro", 15, "otro", "paciente", 987654321);
 		Medico m1 = new Medico("jorge", "Ban", 11,"mail", "dir1", 123, "123", "esp1", 1);
 		Medico m2 = new Medico("Catalina", "Rivera", 11, "mail", "dir1", 15, "123","esp2", 2);
 		Medico m3 = new Medico("Medio", "Dia",  11, "mail", "dir1", 5,"123","esp1", 3);
@@ -171,26 +171,42 @@ public class Menu {
 	
 	public static Paciente ingresarComoPaciente (Clinica c, Scanner sn) {
 		int dniIngresado = 0;
+		int opcion = 0;
 		List<Paciente> paciente = new ArrayList<>();
 		boolean salir = false;
-		while (!salir) {
-			System.out.println("Ingresar DNI");
-			dniIngresado = sn.nextInt();
-			FPDNI seleccionarPaciente = new FPDNI(dniIngresado);
-			paciente.addAll(c.getPaciente(seleccionarPaciente));
-			if (!paciente.isEmpty())
-				salir = true;
-			else {
-				int opcion = 0;
-				while (opcion != 1 && opcion != 2) {
-					System.out.println("No existe cuenta con ese DNI");
-					System.out.println("Ingrese: \n1 Para vover a introducir dni \n2 Para salir");
-					opcion = sn.nextInt();
-					if (opcion == 2)
+		try {
+			while (!salir) {
+				System.out.println("1 - Paciente Existente \n2 - Registrar nuevo");
+				opcion = sn.nextInt();
+				if (opcion == 1) {
+					System.out.println("Ingresar DNI");
+					dniIngresado = sn.nextInt();
+					FPDNI seleccionarPaciente = new FPDNI(dniIngresado);
+					paciente.addAll(c.getPaciente(seleccionarPaciente));
+					if (!paciente.isEmpty())
 						salir = true;
+					else {
+						opcion = 0;
+						while (opcion != 1 && opcion != 2 && opcion != 3) {
+							System.out.println("No existe cuenta con ese DNI");
+							System.out.println("Ingrese: \n1 Para vover a introducir dni \n2 Para Registrarse \n3 Para salir");
+							opcion = sn.nextInt();
+							if (opcion == 2) {
+								registrarPaciente(c, sn);
+								System.out.println("\n");
+							}
+							if (opcion == 3)
+								salir = true;
+						}	
+					}
+				}
+				if (opcion == 2) {
+					registrarPaciente(c, sn);
+					System.out.println("\n");
 				}	
 			}
-		}
+		} catch(InputMismatchException e) {
+			System.out.println("Se debe ingresar un numero");}
 		if (paciente.isEmpty())
 			return null;
 		else {
@@ -204,6 +220,7 @@ public class Menu {
 		List<Secretaria> secretaria = new ArrayList<>();
 		boolean salir = false;
 		while (!salir) {
+			System.out.println("Ingresar como Secretaria");
 			System.out.println("Ingresar DNI");
 			dniIngresado = sn.nextInt();
 			System.out.println("Ingresar contrasena");
@@ -667,9 +684,8 @@ public class Menu {
 		int opcion=0;
 		while(opcion != 3) {
 			System.out.println("Seleccione una opcion: ");
-			System.out.println(" 1: Seleccionar paciente registrado");
-			System.out.println(" 2: Registrar paciente nuevo");
-			System.out.println(" 3: Volver al menu");
+			System.out.println(" 1: Seleccionar paciente ");
+			System.out.println(" 2: Volver al menu");
 			try {
 				opcion = sn.nextInt();
 				switch(opcion) {
@@ -678,16 +694,11 @@ public class Menu {
 						Criterio criterio =  new CriterioMedicosSecretaria(s);
 						Medico m = c.seleccionarMedico(criterio, sn);
 						if(p != null && m != null) {
-							Turno t = crearTurno(m, p, sn);
-							c.addTurno(t);
+							sacarTurno(c, p, sn, m);
 						}
 					}
-						break;
-					case 2:{
-						registrarPaciente(c, sn);
-						break;
-					}	
-					case 3:
+						break;	
+					case 2:
 						break;
 					default:
 						System.out.println("Ingresar un numero dentro de los numeros de las opciones");
@@ -698,8 +709,9 @@ public class Menu {
 	}
 	
 	public static void registrarPaciente(Clinica c, Scanner sn) {
-		Paciente p = new Paciente("","", 0, "", "", 0, 0); 
+		Paciente p = new Paciente("","", 0, "", "", 0); 
         String aux;
+        int opcion = 0;
     	System.out.println("Ingresar Nombre"); 
     	aux = sn.next();
     	p.setNombre(aux); 
@@ -713,14 +725,16 @@ public class Menu {
     	p.setTelefono(sn.nextInt()); 
     	System.out.println("Ingresar Mail"); 
     	aux = sn.next();
-    	p.setMail(aux); 
-    	System.out.println("Ingresar Obra Social");
-    	aux = sn.next();
-    	p.setObraSocial(aux); 
+    	p.setMail(aux);
+    	System.out.println("Si posee Obra Social ingrese 1 \n En caso contrario ingrese 2");
+    	opcion = sn.nextInt();
+    	if (opcion == 1) {
+	    	System.out.println("Ingresar Obra Social");
+	    	aux = sn.next();
+	    	p.setObraSocial(aux);
+    	}
     	System.out.println("Ingresar dni");
     	p.setDni(sn.nextInt()); 
-    	System.out.println("Ingresar nro Afiliado");
-    	p.setNumeroDeAfiliado(sn.nextInt()); 
     	c.addPaciente(p);
 	}	
 }
