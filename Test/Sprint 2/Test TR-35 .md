@@ -12,12 +12,12 @@ _El usuario quiere entrar como secretaria y el sistema le pide DNI de la cuenta 
 _Cumple_
 
 ###  Datos que tiene el sistema
-_s1 ("Susan", "Hernandez", 545, "mail", "dir", 1, "123"): Secretaria  
- s2 ("Ana", "Fernandez", 545, "mail", "dir", 2, "123"): Secretaria_
+_s1 ("Susan": String, "Hernandez": String, 545: int, "mail": String, "dir": String, 1: int, "123": String): Secretaria  
+ s2 ("Ana": String, "Fernandez": String, 545: int, "mail": String, "dir": String, 2: int, "123": String): Secretaria_
 
 ###  Datos de entrada 
-_DNI : int   
- contrasena : String_
+_DNI (1) : int   
+ contrasena ("123") : String_
 
 ###  Salida Esperada 
 _Que acepte los datos dados_
@@ -40,10 +40,10 @@ _El sistema corrobora que la informacion sea correcto_
 _Cumple_
 
 ###  Datos que tiene el sistema
-_s1 ("Susan", "Hernandez", 545, "mail", "dir", 1, "123"): Secretaria  
- s2 ("Ana", "Fernandez", 545, "mail", "dir", 2, "123"): Secretaria  
- DNI : int   
- contrasena : String_
+_s1 ("Susan": String, "Hernandez": String, 545: int, "mail": String, "dir": String, 1: int, "123": String): Secretaria  
+ s2 ("Ana": String, "Fernandez": String, 545: int, "mail": String, "dir": String, 2: int, "123": String): Secretaria   
+ DNI (1) : int   
+ contrasena ("123") : String_
 
 ###  Datos de entrada 
 _Ningun dato de entrada_
