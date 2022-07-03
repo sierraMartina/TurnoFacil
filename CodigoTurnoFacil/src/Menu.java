@@ -659,7 +659,7 @@ public class Menu {
 		System.out.println(" 1: Seleccionar paciente registrado");
 		System.out.println(" 2: Registrar paciente nuevo");
 		System.out.println(" 3: Volver al menu");
-		int opcion = sn.nextInt();
+		opcion = sn.nextInt();
 		while(opcion != 3) {
 			switch(opcion) {
 				case 1:{
@@ -703,7 +703,7 @@ public class Menu {
     	aux = sn.next();
     	p.setObraSocial(aux); 
     	System.out.println("Ingresar nombre dni");
-    	p.dni(sn.nextInt()); 
+    	p.setDni(sn.nextInt()); 
     	System.out.println("Ingresar nombre nro Afiliado");
     	p.setNumeroDeAfiliado(sn.nextInt()); 
     	c.addPaciente(p);
