@@ -2,26 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Paciente extends Persona {
-	private int numeroDeAfiliado;
+	private static int numeroDeAfiliado = 0;
 	private String obraSocial;
 	private List<Turno> turnos = new ArrayList<>();
 	private String nombreEnCasoDeNoTenerOS = "NO TIENE";
 
-	public Paciente(String nombre, String apellido, int telefono, String mail, String direccion, int dni,
-			int numeroDeAfiliado) {
+	public Paciente(String nombre, String apellido, int telefono, String mail, String direccion, int dni) {
 		super(nombre, apellido, telefono, mail, direccion, dni);
-		this.numeroDeAfiliado = numeroDeAfiliado;
+		numeroDeAfiliado ++;
 		obraSocial = nombreEnCasoDeNoTenerOS;
 	}
 
 	
-	public int getNumeroDeAfiliado() {
+	public static int getNumeroDeAfiliado() {
 		return numeroDeAfiliado;
 	}
 
-	public void setNumeroDeAfiliado(int numeroDeAfiliado) {
-		this.numeroDeAfiliado = numeroDeAfiliado;
-	}
 
 	public String getObraSocial() {
 		return obraSocial;
