@@ -6,8 +6,6 @@ public class Paciente extends Persona {
 	private String obraSocial;
 	private List<Turno> turnos = new ArrayList<>();
 	private String nombreEnCasoDeNoTenerOS = "NO TIENE";
-	
-	
 
 	public Paciente(String nombre, String apellido, int telefono, String mail, String direccion, int dni,
 			int numeroDeAfiliado) {
