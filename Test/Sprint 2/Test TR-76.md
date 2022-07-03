@@ -12,14 +12,14 @@ _Se crea un turno para el paciente, y se guarda en el sistema(para la clinica, e
 _Cumple_
 
 ###  Datos que tiene el sistema
-_c (pacientes: List<Paciente>, secretarias: List<Secretaria>, medicos:  List<Medico> , turnos: List<Turno>): Clinica_
+_c (pacientes: List< Paciente >, secretarias: List< Secretaria >, medicos:  List< Medico > , turnos: List< Turno >): Clinica_
 
-_s (medicosACargo: List<Medico>): Secretaria_
+_s (medicosACargo: List< Medico >): Secretaria_
 
 ###  Datos de entrada 
-_p (numeroDeAfiliado: int, obraSocial: String, turnos: List<Turno>, String nombreEnCasoDeNoTenerOS): Paciente_
+_p (numeroDeAfiliado: int, obraSocial: String, turnos: List< Turno >, String nombreEnCasoDeNoTenerOS): Paciente_
 
-_m (especialidad: String, horarioLaboral: Horario, matricula: int, obraSociales: List<String>, turnos: List<Turno> ): Medico_
+_m (especialidad: String, horarioLaboral: Horario, matricula: int, obraSociales: List< String >, turnos: List< Turno > ): Medico_
 
 _t (m: Medico, p: Paciente, fecha: Calendar, hora: int):  Turno_
 
@@ -44,12 +44,12 @@ _Se verifica que el paciente este registrado, en caso de que no lo este se regis
 _Cumple_
 
 ###  Datos que tiene el sistema
-_c (pacientes: List<Paciente>, secretarias: List<Secretaria>, medicos:  List<Medico> , turnos: List<Turno>): Clinica_
+_c (pacientes: List< Paciente >, secretarias: List< Secretaria >, medicos:  List< Medico > , turnos: List< Turno >): Clinica_
 
-_s (medicosACargo: List<Medico>): Secretaria_
+_s (medicosACargo: List< Medico >): Secretaria_
 
 ###  Datos de entrada 
-_p (numeroDeAfiliado: int, obraSocial: String, turnos: List<Turno>,  nombreEnCasoDeNoTenerOS: String): Paciente_
+_p (numeroDeAfiliado: int, obraSocial: String, turnos: List< Turno >,  nombreEnCasoDeNoTenerOS: String): Paciente_
 
 ###  Salida Esperada 
 _Registro del paciente en el sistema._
