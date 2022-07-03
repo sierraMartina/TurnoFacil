@@ -654,31 +654,36 @@ public class Menu {
 	}
 	
 	public static void cargarNuevoTurno(Clinica c, Secretaria s, Scanner sn) {
-		int opcion;
-		System.out.println("Seleccione una opcion: ");
-		System.out.println(" 1: Seleccionar paciente registrado");
-		System.out.println(" 2: Registrar paciente nuevo");
-		System.out.println(" 3: Volver al menu");
-		opcion = sn.nextInt();
+		int opcion=0;
 		while(opcion != 3) {
-			switch(opcion) {
-				case 1:{
-					Paciente p = ingresarComoPaciente(c, sn);
-					Criterio criterio =  new CriterioMedicosSecretaria(s);
-					Medico m = c.seleccionarMedico(criterio, sn);
-					if(p != null && m != null) {
-						Turno t = crearTurno(m, p, sn);
-						c.addTurno(t);
+			System.out.println("Seleccione una opcion: ");
+			System.out.println(" 1: Seleccionar paciente registrado");
+			System.out.println(" 2: Registrar paciente nuevo");
+			System.out.println(" 3: Volver al menu");
+			try {
+				opcion = sn.nextInt();
+				switch(opcion) {
+					case 1:{
+						Paciente p = ingresarComoPaciente(c, sn);
+						Criterio criterio =  new CriterioMedicosSecretaria(s);
+						Medico m = c.seleccionarMedico(criterio, sn);
+						if(p != null && m != null) {
+							Turno t = crearTurno(m, p, sn);
+							c.addTurno(t);
+						}
 					}
+						break;
+					case 2:{
+						registrarPaciente(c, sn);
+						break;
+					}	
+					case 3:
+						break;
+					default:
+						System.out.println("Ingresar un numero dentro de los numeros de las opciones");
 				}
-					break;
-				case 2:{
-					registrarPaciente(c, sn);
-					break;
-				}	
-				case 3:
-					break;
-			}
+			}  catch(InputMismatchException e) {
+				System.out.println("Se debe ingresar un numero");}
 		}
 	}
 	
@@ -699,12 +704,12 @@ public class Menu {
     	System.out.println("Ingresar Mail"); 
     	aux = sn.next();
     	p.setMail(aux); 
-    	System.out.println("Ingresar nombre Obra Social");
+    	System.out.println("Ingresar Obra Social");
     	aux = sn.next();
     	p.setObraSocial(aux); 
-    	System.out.println("Ingresar nombre dni");
+    	System.out.println("Ingresar dni");
     	p.setDni(sn.nextInt()); 
-    	System.out.println("Ingresar nombre nro Afiliado");
+    	System.out.println("Ingresar nro Afiliado");
     	p.setNumeroDeAfiliado(sn.nextInt()); 
     	c.addPaciente(p);
 	}	
