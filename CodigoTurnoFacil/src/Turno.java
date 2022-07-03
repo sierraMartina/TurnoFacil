@@ -47,7 +47,7 @@ public class Turno implements Comparable<Turno>{
 	
 	@Override
 	public String toString() {
-		return " Medico: " + this.getMedico() + " Dia: " + this.getFecha().get(Calendar.DAY_OF_MONTH) + " Mes: " + this.getFecha().get(Calendar.MONTH) + " A�o: " + this.getFecha().get(Calendar.YEAR) + " Hora: " + this.getHora();
+		return " Medico: " + this.getMedico() + " Dia: " + this.getFecha().get(Calendar.DAY_OF_MONTH) + " Mes: " + this.getFecha().get(Calendar.MONTH) + " anio: " + this.getFecha().get(Calendar.YEAR) + " Hora: " + this.getHora();
 	}
 	
 	@Override

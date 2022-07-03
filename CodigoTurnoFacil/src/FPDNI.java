@@ -1,6 +1,6 @@
 
 public class FPDNI implements FiltrarPersonas {
-	int dni;
+	private int dni;
 	
 	
 	public FPDNI(int dni) {

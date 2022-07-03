@@ -99,6 +99,9 @@ public class Clinica {
 		if (!pacientes.contains(p)) {
 			pacientes.add(p);
 		}
+		else {
+			System.out.println("Ya existe un paciente con este DNI");
+		}
 	}
 	
 	public void removePersona (FiltrarPersonas fp) {
