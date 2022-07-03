@@ -552,7 +552,7 @@ public class Menu {
 							System.out.println(" Ingrese 2 para filtrar por tarde");
 							opcion = sn.nextInt();
 							if (opcion == 1) {
-								FiltroTurno f = new FTMañana();
+								FiltroTurno f = new FTmanana();
 								Turno t = SeleccionarTurnos(m, sn, f);
 								if (t != null) {
 									modificarTurno(c, t, sn);
