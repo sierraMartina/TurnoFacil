@@ -60,4 +60,9 @@ public class Paciente extends Persona {
         System.out.println("Telefono: " + this.getTelefono()+ " ");
         System.out.println("NumeroDeAfiliado:" + numeroDeAfiliado + "\n");
     }
+    
+    @Override
+	public String toString () {
+		return this.getApellido() + " " + this.getNombre();
+	}
 }

@@ -176,10 +176,9 @@ public class Menu {
 		boolean salir = false;
 		try {
 			while (!salir) {
-				System.out.println("1 - Paciente Existente \n2 - Registrar nuevo");
 				opcion = sn.nextInt();
 				if (opcion == 1) {
-					System.out.println("Ingresar DNI");
+					System.out.println("Ingresar DNI del paciente");
 					dniIngresado = sn.nextInt();
 					FPDNI seleccionarPaciente = new FPDNI(dniIngresado);
 					paciente.addAll(c.getPaciente(seleccionarPaciente));
@@ -187,22 +186,14 @@ public class Menu {
 						salir = true;
 					else {
 						opcion = 0;
-						while (opcion != 1 && opcion != 2 && opcion != 3) {
+						while (opcion != 1 && opcion != 2) {
 							System.out.println("No existe cuenta con ese DNI");
-							System.out.println("Ingrese: \n1 Para vover a introducir dni \n2 Para Registrarse \n3 Para salir");
+							System.out.println("Ingrese: \n1 Para vover a introducir dni \n2 Para salir");
 							opcion = sn.nextInt();
-							if (opcion == 2) {
-								registrarPaciente(c, sn);
-								System.out.println("\n");
-							}
-							if (opcion == 3)
+							if (opcion == 2)
 								salir = true;
 						}	
 					}
-				}
-				if (opcion == 2) {
-					registrarPaciente(c, sn);
-					System.out.println("\n");
 				}	
 			}
 		} catch(InputMismatchException e) {
@@ -685,7 +676,8 @@ public class Menu {
 		while(opcion != 3) {
 			System.out.println("Seleccione una opcion: ");
 			System.out.println(" 1: Seleccionar paciente ");
-			System.out.println(" 2: Volver al menu");
+			System.out.println(" 2: Registrar nuevo paciente ");
+			System.out.println(" 3: Volver al menu");
 			try {
 				opcion = sn.nextInt();
 				switch(opcion) {
@@ -699,6 +691,9 @@ public class Menu {
 					}
 						break;	
 					case 2:
+						registrarPaciente(c, sn);
+						break;
+					case 3:
 						break;
 					default:
 						System.out.println("Ingresar un numero dentro de los numeros de las opciones");
