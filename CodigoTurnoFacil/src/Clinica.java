@@ -166,5 +166,4 @@ public class Clinica {
 			turno.getPaciente().borrarTurno(turno);
 		}
 	}
-	
 }
