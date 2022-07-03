@@ -12,9 +12,9 @@ _Dar un numero de DNI y obtener un paciente especifico_
 _Cumple_
 
 ###  Datos que tiene el sistema
-_s1 ("Susan": String, "Hernandez": String, 545: int, "mail": String, "dir": String, 1: int, "123": String, medicos: List < Medicos >): Secretaria   
-p1 ("yo": String, "soy": String, 14: int, "tu": String, "padre": String, 123456789: int)  
-_
+_s1 ("Susan": String, "Hernandez": String, 545: int, "mail": String, "dir": String, 1: int, "123": String, medicos: List < Medicos >): Secretaria  
+c (pacientes: List< Paciente >, secretarias: List< Secretaria >, medicos: List< Medico > , turnos: List< Turno >): Clinica   
+p1 ("yo": String, "soy": String, 14: int, "tu": String, "padre": String, 123456789: int)_
 
 ###  Datos de entrada 
 _int (123456789): int_
