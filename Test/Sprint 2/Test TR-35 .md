@@ -26,7 +26,6 @@ _Que acepte los datos dados_
 _Acepta el DNI y la contrasena y esperamos a que los corrobore_
 
 ### Comentarios (Opcional)
-_Comentario breve_
 
 ## _Se debe corroborar que el usuario y contraseña sea correcta_
 
@@ -55,4 +54,3 @@ _El sistema corroboro los datos dados y ingresa a la cuenta de la secretaria_
 _El sistema corroboro los datos dados y ingresa a la cuenta de la secretaria_
 
 ### Comentarios (Opcional)
-_Comentario breve_
